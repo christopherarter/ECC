@@ -1466,6 +1466,8 @@ ECC provides Reasonix project support through a conservative `.reasonix` adapter
 
 The adapter writes ECC-managed files under `.reasonix/` and keeps API credentials out of the repo. MCP and hooks integration is deferred until Reasonix documents its on-disk config paths; never commit the Reasonix-managed `~/.reasonix/config.json`, which holds your API key.
 
+> **Note:** ECC places the managed `REASONIX.md` in `./.reasonix/` to match the sibling `.gemini/GEMINI.md` convention. Reasonix's documentation is currently ambiguous about whether project memory is read from the repository root or from `./.reasonix/`, so this placement is not yet verified against a live Reasonix install. If a Reasonix release reads only a repo-root `REASONIX.md`, the placement will be adjusted in a follow-up.
+
 ---
 
 ## OpenCode Support

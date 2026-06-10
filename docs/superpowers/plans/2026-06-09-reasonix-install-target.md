@@ -377,7 +377,8 @@ In `tests/scripts/install-apply.test.js`, add a new test block immediately **aft
       assert.strictEqual(result.code, 0, result.stderr);
 
       assert.ok(fs.existsSync(path.join(projectDir, '.reasonix', 'REASONIX.md')));
-      assert.ok(fs.existsSync(path.join(projectDir, '.reasonix', 'rules', 'common', 'coding-style.md')));
+      assert.ok(fs.existsSync(path.join(projectDir, '.reasonix', 'rules', 'common-coding-style.md')));
+      assert.ok(!fs.existsSync(path.join(projectDir, '.reasonix', 'rules', 'common', 'coding-style.md')));
       assert.ok(fs.existsSync(path.join(projectDir, '.reasonix', 'agents', 'architect.md')));
       assert.ok(fs.existsSync(path.join(projectDir, '.reasonix', 'commands', 'plan.md')));
       assert.ok(fs.existsSync(path.join(projectDir, '.reasonix', 'skills', 'tdd-workflow', 'SKILL.md')));
@@ -707,4 +708,3 @@ Expected: working tree clean (all changes committed across Tasks 1–3).
 - **Spec coverage:** New target (Task 1) ✓; mirror-zed module set via `targets`-array edit (Task 2 Step 4) ✓; managed `REASONIX.md` at `.reasonix/REASONIX.md` (Task 2 Step 3) ✓; legacy-compat parity (Task 2 Step 7) ✓; help text (Task 2 Step 8) ✓; both schemas (Task 1 Steps 7–8) ✓; compliance matrix (Task 3) ✓; tests (Tasks 1–2) and full suite (Task 4) ✓. Deferred MCP/hooks are recorded in the compliance record's `unsupported_surfaces` (Task 3 Step 2) ✓.
 - **No placeholders:** every code/edit step shows literal content and exact commands with expected output.
 - **Type/name consistency:** adapter id `reasonix-project` and target `reasonix` are used identically across the adapter, registry, schemas, manifest, tests, and compliance record.
-```
