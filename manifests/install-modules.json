@@ -16,7 +16,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "reasonix"
       ],
       "dependencies": [],
       "defaultInstall": true,
@@ -41,7 +42,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "reasonix"
       ],
       "dependencies": [],
       "defaultInstall": true,
@@ -66,7 +68,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "reasonix"
       ],
       "dependencies": [],
       "defaultInstall": true,
@@ -105,6 +108,7 @@
         ".gemini",
         ".opencode",
         ".qwen",
+        ".reasonix",
         ".zed",
         "mcp-configs",
         "scripts/auto-update.js",
@@ -121,7 +125,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "reasonix"
       ],
       "dependencies": [],
       "defaultInstall": true,
@@ -195,7 +200,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "reasonix"
       ],
       "dependencies": [
         "rules-core",
@@ -229,7 +235,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "reasonix"
       ],
       "dependencies": [
         "platform-configs"
@@ -275,7 +282,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "reasonix"
       ],
       "dependencies": [
         "platform-configs"
@@ -305,7 +313,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "reasonix"
       ],
       "dependencies": [
         "workflow-quality",
@@ -346,7 +355,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "reasonix"
       ],
       "dependencies": [
         "workflow-quality"
@@ -379,7 +389,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "reasonix"
       ],
       "dependencies": [
         "platform-configs"
@@ -414,7 +425,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "reasonix"
       ],
       "dependencies": [
         "platform-configs"
@@ -457,7 +469,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "reasonix"
       ],
       "dependencies": [
         "platform-configs"
@@ -488,7 +501,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "reasonix"
       ],
       "dependencies": [
         "research-apis",
@@ -517,7 +531,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "reasonix"
       ],
       "dependencies": [
         "business-content"
@@ -548,7 +563,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "reasonix"
       ],
       "dependencies": [
         "platform-configs"
@@ -605,7 +621,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "reasonix"
       ],
       "dependencies": [
         "platform-configs"
@@ -653,7 +670,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "reasonix"
       ],
       "dependencies": [
         "platform-configs"
@@ -687,7 +705,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "reasonix"
       ],
       "dependencies": [
         "platform-configs"
@@ -713,7 +732,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "reasonix"
       ],
       "dependencies": [
         "framework-language",
@@ -750,7 +770,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "reasonix"
       ],
       "dependencies": [
         "platform-configs"
@@ -777,7 +798,8 @@
         "codebuddy",
         "joycode",
         "qwen",
-        "zed"
+        "zed",
+        "reasonix"
       ],
       "dependencies": [
         "platform-configs"

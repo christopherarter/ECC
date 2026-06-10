@@ -73,6 +73,13 @@ const LEGACY_COMPAT_BASE_MODULE_IDS_BY_TARGET = Object.freeze({
     'platform-configs',
     'workflow-quality',
   ],
+  reasonix: [
+    'rules-core',
+    'agents-core',
+    'commands-core',
+    'platform-configs',
+    'workflow-quality',
+  ],
 });
 const LEGACY_LANGUAGE_ALIAS_TO_CANONICAL = Object.freeze({
   c: 'c',
