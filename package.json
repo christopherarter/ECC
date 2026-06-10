@@ -48,6 +48,7 @@
     ".gemini/",
     ".opencode/",
     ".qwen/",
+    ".reasonix/",
     ".zed/",
     ".mcp.json",
     "AGENTS.md",

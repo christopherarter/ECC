@@ -2,7 +2,7 @@
 
 - **Date:** 2026-06-09
 - **Status:** Approved design, pending spec review
-- **Author:** ECC maintainers (chris@arter.dev)
+- **Author:** ECC maintainers (<chris@arter.dev>)
 
 ## Summary
 

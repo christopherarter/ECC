@@ -466,7 +466,7 @@ Before any commit:
 
 - [ ] **Step 4: Add `reasonix` to every manifest module that targets `zed`**
 
-In `manifests/install-modules.json`, every module `targets` array that ends with `"zed"` lists it as the final element (8-space indent, no trailing comma, followed by `      ],`). Add `reasonix` after each. Use a single replace-all edit.
+In `manifests/install-modules.json`, every module `targets` array that ends with `"zed"` lists it as the final element (8-space indent, no trailing comma, followed by a 6-space-indented `],`). Add `reasonix` after each. Use a single replace-all edit.
 
 Replace all occurrences of this exact block:
 
