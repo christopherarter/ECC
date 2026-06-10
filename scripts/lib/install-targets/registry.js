@@ -8,6 +8,7 @@ const geminiProject = require('./gemini-project');
 const joycodeProject = require('./joycode-project');
 const opencodeHome = require('./opencode-home');
 const qwenHome = require('./qwen-home');
+const reasonixProject = require('./reasonix-project');
 const zedProject = require('./zed-project');
 
 const ADAPTERS = Object.freeze([
@@ -22,6 +23,7 @@ const ADAPTERS = Object.freeze([
   joycodeProject,
   qwenHome,
   zedProject,
+  reasonixProject,
 ]);
 
 function listInstallTargetAdapters() {
