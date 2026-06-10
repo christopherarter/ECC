@@ -306,6 +306,32 @@ function runTests() {
     );
   })) passed++; else failed++;
 
+  if (test('resolves Reasonix minimal profile with project memory and without hooks', () => {
+    const projectRoot = '/workspace/reasonix-app';
+    const plan = resolveInstallPlan({
+      profileId: 'minimal',
+      target: 'reasonix',
+      projectRoot,
+    });
+
+    assert.deepStrictEqual(
+      plan.selectedModuleIds,
+      ['rules-core', 'agents-core', 'commands-core', 'platform-configs', 'workflow-quality']
+    );
+    assert.deepStrictEqual(plan.skippedModuleIds, []);
+    assert.strictEqual(plan.targetAdapterId, 'reasonix-project');
+    assert.strictEqual(plan.targetRoot, path.join(projectRoot, '.reasonix'));
+    assert.ok(
+      plan.operations.some(operation => operation.sourceRelativePath === '.reasonix'),
+      'Should install Reasonix bundled project memory'
+    );
+    assert.ok(
+      !plan.selectedModuleIds.includes('hooks-runtime')
+      && !plan.operations.some(operation => operation.moduleId === 'hooks-runtime'),
+      'Reasonix minimal profile should not install hook runtime files'
+    );
+  })) passed++; else failed++;
+
   if (test('resolves machine-learning component with workflow dependencies', () => {
     const plan = resolveInstallPlan({
       includeComponentIds: ['capability:machine-learning'],
