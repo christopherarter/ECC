@@ -301,6 +301,44 @@ function runTests() {
     }
   })) passed++; else failed++;
 
+  if (test('installs the reasonix project target with bundled memory and assets', () => {
+    const homeDir = createTempDir('install-apply-home-');
+    const projectDir = createTempDir('install-apply-project-');
+
+    try {
+      const result = run(['--target', 'reasonix', '--profile', 'minimal'], { cwd: projectDir, homeDir });
+      assert.strictEqual(result.code, 0, result.stderr);
+
+      assert.ok(fs.existsSync(path.join(projectDir, '.reasonix', 'REASONIX.md')));
+      assert.ok(
+        fs.readFileSync(path.join(projectDir, '.reasonix', 'REASONIX.md'), 'utf8').includes('ECC-managed file'),
+        'Bundled REASONIX.md should carry the ECC-managed banner'
+      );
+      assert.ok(fs.existsSync(path.join(projectDir, '.reasonix', 'rules', 'common-coding-style.md')));
+      assert.ok(!fs.existsSync(path.join(projectDir, '.reasonix', 'rules', 'common', 'coding-style.md')));
+      assert.ok(fs.existsSync(path.join(projectDir, '.reasonix', 'agents', 'architect.md')));
+      assert.ok(fs.existsSync(path.join(projectDir, '.reasonix', 'commands', 'plan.md')));
+      assert.ok(fs.existsSync(path.join(projectDir, '.reasonix', 'skills', 'tdd-workflow', 'SKILL.md')));
+      assert.ok(!fs.existsSync(path.join(projectDir, '.reasonix', 'hooks')));
+
+      const statePath = path.join(projectDir, '.reasonix', 'ecc-install-state.json');
+      const state = readJson(statePath);
+      assert.strictEqual(state.target.id, 'reasonix-project');
+      assert.deepStrictEqual(state.request.modules, []);
+      assert.strictEqual(state.request.profile, 'minimal');
+      assert.ok(state.resolution.selectedModules.includes('workflow-quality'));
+      assert.ok(
+        state.operations.some(operation => (
+          operation.destinationPath.endsWith(path.join('.reasonix', 'skills', 'tdd-workflow', 'SKILL.md'))
+        )),
+        'Should record reasonix skill file operation'
+      );
+    } finally {
+      cleanup(homeDir);
+      cleanup(projectDir);
+    }
+  })) passed++; else failed++;
+
   if (test('supports dry-run without mutating the target project', () => {
     const homeDir = createTempDir('install-apply-home-');
     const projectDir = createTempDir('install-apply-project-');

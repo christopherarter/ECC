@@ -49,6 +49,7 @@ function runTests() {
     assert.ok(targets.includes('joycode'), 'Should include joycode target');
     assert.ok(targets.includes('qwen'), 'Should include qwen target');
     assert.ok(targets.includes('zed'), 'Should include zed target');
+    assert.ok(targets.includes('reasonix'), 'Should include reasonix target');
   })) passed++; else failed++;
 
   if (test('resolves cursor adapter root and install-state path from project root', () => {
@@ -1086,6 +1087,106 @@ function runTests() {
     } finally {
       fs.rmSync(repoRoot, { recursive: true, force: true });
     }
+  })) passed++; else failed++;
+
+  if (test('resolves reasonix adapter root and install-state path from project root', () => {
+    const adapter = getInstallTargetAdapter('reasonix');
+    const projectRoot = '/workspace/app';
+    const root = adapter.resolveRoot({ projectRoot });
+    const statePath = adapter.getInstallStatePath({ projectRoot });
+
+    assert.strictEqual(adapter.id, 'reasonix-project');
+    assert.strictEqual(adapter.target, 'reasonix');
+    assert.strictEqual(adapter.kind, 'project');
+    assert.strictEqual(root, path.join(projectRoot, '.reasonix'));
+    assert.strictEqual(statePath, path.join(projectRoot, '.reasonix', 'ecc-install-state.json'));
+  })) passed++; else failed++;
+
+  if (test('reasonix adapter supports lookup by target and adapter id', () => {
+    const byTarget = getInstallTargetAdapter('reasonix');
+    const byId = getInstallTargetAdapter('reasonix-project');
+
+    assert.strictEqual(byTarget.id, 'reasonix-project');
+    assert.strictEqual(byId.id, 'reasonix-project');
+    assert.ok(byTarget.supports('reasonix'));
+    assert.ok(byTarget.supports('reasonix-project'));
+  })) passed++; else failed++;
+
+  if (test('plans reasonix memory, commands, agents, skills, and flattened rules', () => {
+    const repoRoot = path.join(__dirname, '..', '..');
+    const projectRoot = '/workspace/app';
+
+    const plan = planInstallTargetScaffold({
+      target: 'reasonix',
+      repoRoot,
+      projectRoot,
+      modules: [
+        {
+          id: 'rules-core',
+          paths: ['rules'],
+        },
+        {
+          id: 'agents-core',
+          paths: ['agents'],
+        },
+        {
+          id: 'commands-core',
+          paths: ['commands'],
+        },
+        {
+          id: 'platform-configs',
+          paths: ['.reasonix', '.gemini', 'mcp-configs'],
+        },
+        {
+          id: 'workflow-quality',
+          paths: ['skills/tdd-workflow'],
+        },
+      ],
+    });
+
+    assert.strictEqual(plan.adapter.id, 'reasonix-project');
+    assert.strictEqual(plan.targetRoot, path.join(projectRoot, '.reasonix'));
+    assert.strictEqual(plan.installStatePath, path.join(projectRoot, '.reasonix', 'ecc-install-state.json'));
+    assert.ok(
+      plan.operations.some(operation => (
+        normalizedRelativePath(operation.sourceRelativePath) === '.reasonix'
+        && operation.destinationPath === path.join(projectRoot, '.reasonix')
+        && operation.strategy === 'sync-root-children'
+      )),
+      'Should sync the bundled .reasonix memory dir into .reasonix'
+    );
+    assert.ok(
+      plan.operations.some(operation => (
+        normalizedRelativePath(operation.sourceRelativePath) === 'rules/common/coding-style.md'
+        && operation.destinationPath === path.join(projectRoot, '.reasonix', 'rules', 'common-coding-style.md')
+      )),
+      'Should flatten common rules into namespaced files for reasonix'
+    );
+    assert.ok(
+      plan.operations.some(operation => (
+        normalizedRelativePath(operation.sourceRelativePath) === 'agents'
+        && operation.destinationPath === path.join(projectRoot, '.reasonix', 'agents')
+      )),
+      'Should install agents under .reasonix/agents'
+    );
+    assert.ok(
+      plan.operations.some(operation => (
+        normalizedRelativePath(operation.sourceRelativePath) === 'commands'
+        && operation.destinationPath === path.join(projectRoot, '.reasonix', 'commands')
+      )),
+      'Should install commands under .reasonix/commands'
+    );
+    assert.ok(
+      plan.operations.some(operation => (
+        normalizedRelativePath(operation.sourceRelativePath) === 'skills/tdd-workflow'
+        && operation.destinationPath === path.join(projectRoot, '.reasonix', 'skills', 'tdd-workflow')
+      )),
+      'Should install skills under .reasonix/skills'
+    );
+    assert.ok(
+      !plan.operations.some(operation => normalizedRelativePath(operation.sourceRelativePath) === '.gemini'),
+      'Should skip foreign Gemini platform config paths'
+    );
   })) passed++; else failed++;
 
   console.log(`\nResults: Passed: ${passed}, Failed: ${failed}`);

@@ -197,6 +197,34 @@ const ADAPTER_RECORDS = Object.freeze([
     ],
   },
   {
+    id: 'reasonix',
+    harness: 'Reasonix',
+    state: 'Adapter-backed',
+    supported_assets: [
+      'managed REASONIX.md memory',
+      'flattened project rules',
+      'shared skills',
+      'commands',
+      'agents',
+    ],
+    unsupported_surfaces: [
+      'MCP and hooks integration deferred until Reasonix documents their on-disk config paths',
+    ],
+    install_or_onramp: ['`./install.sh --profile minimal --target reasonix`'],
+    verification_commands: [
+      '`node tests/lib/install-targets.test.js`',
+      '`node tests/scripts/install-apply.test.js`',
+    ],
+    risk_notes: ['Do not write the Reasonix-managed `~/.reasonix/config.json`; it holds the API key.'],
+    last_verified_at: '2026-06-09',
+    owner: 'ECC maintainers',
+    source_docs: [
+      '.reasonix/REASONIX.md',
+      'scripts/lib/install-targets/reasonix-project.js',
+      'tests/lib/install-targets.test.js',
+    ],
+  },
+  {
     id: 'dmux',
     harness: 'dmux',
     state: 'Adapter-backed',

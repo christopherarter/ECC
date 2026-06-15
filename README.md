@@ -1181,6 +1181,7 @@ Yes. ECC is cross-platform:
 - **JoyCode / CodeBuddy**: Project-local selective install adapters for commands, agents, skills, and flattened rules. See [JoyCode Adapter Guide](docs/JOYCODE-GUIDE.md).
 - **Qwen CLI**: Home-directory selective install adapter for commands, agents, skills, rules, and Qwen config. See [Qwen CLI Adapter Guide](docs/QWEN-GUIDE.md).
 - **Zed**: Project-local selective install adapter for `.zed/settings.json`, flattened rules, commands, agents, and skills.
+- **Reasonix**: Project-local selective install adapter for a managed `REASONIX.md`, flattened rules, commands, agents, and skills in `.reasonix/`.
 - **Non-native harnesses**: Manual fallback path for Grok and similar interfaces. See [Manual Adaptation Guide](docs/MANUAL-ADAPTATION-GUIDE.md).
 - **Claude Code**: Native — this is the primary target.
 </details>
@@ -1448,6 +1449,24 @@ ECC provides Zed project support through a conservative `.zed` adapter for proje
 ```
 
 The adapter writes ECC-managed files under `.zed/` and keeps BYOK/OpenRouter credentials out of the repo. Configure Zed account or API keys through Zed's own settings UI or your local user settings.
+
+---
+
+## Reasonix Support
+
+ECC provides Reasonix project support through a conservative `.reasonix` adapter for a project-local managed `REASONIX.md`, flattened rules, agents, commands, and skills.
+
+```bash
+./install.sh --profile minimal --target reasonix
+```
+
+```powershell
+.\install.ps1 --profile minimal --target reasonix
+```
+
+The adapter writes ECC-managed files under `.reasonix/` and keeps API credentials out of the repo. MCP and hooks integration is deferred until Reasonix documents its on-disk config paths; never commit the Reasonix-managed `~/.reasonix/config.json`, which holds your API key.
+
+> **Note:** ECC places the managed `REASONIX.md` in `./.reasonix/` to match the sibling `.gemini/GEMINI.md` convention. Reasonix's documentation is currently ambiguous about whether project memory is read from the repository root or from `./.reasonix/`, so this placement is not yet verified against a live Reasonix install. If a Reasonix release reads only a repo-root `REASONIX.md`, the placement will be adjusted in a follow-up.
 
 ---
 
